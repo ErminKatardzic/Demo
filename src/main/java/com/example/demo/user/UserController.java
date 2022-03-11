@@ -2,6 +2,7 @@ package com.example.demo.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,12 +43,23 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> getUserDetails(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
         Optional<UserDocument> userDocumentOptional = userRepository.findById(id);
         return userDocumentOptional.map(userDocument ->
                         ResponseEntity.ok().body(userMapper.fromDocument(userDocument))
                 )
                 .orElseGet(() -> ResponseEntity.notFound().build());
 
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 }
