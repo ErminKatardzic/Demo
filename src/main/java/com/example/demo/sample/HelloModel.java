@@ -1,4 +1,10 @@
 package com.example.demo.sample;
 
-public record HelloModel(String helloMessage) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class HelloModel {
+    private String helloMessage;
 }
