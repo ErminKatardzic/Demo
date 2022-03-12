@@ -25,16 +25,24 @@ export class UsersApiService {
       {'headers': headers});
   }
 
-  public deleteUser(userId: Number): Observable<void>{
-    return this.httpclient.delete<void>(UsersApiService.baseApiPath + userId);
+  public deleteUser(userId: Number): Observable<void> {
+    return this.httpclient.delete<void>(`${UsersApiService.baseApiPath}${userId}`);
   }
 
   public updateUser(user: UserDTO): Observable<UserDTO> {
-    console.log("Sending request" + JSON.stringify(user));
     const headers = {'content-type': 'application/json'};
 
     return this.httpclient.patch<UserDTO>(UsersApiService.baseApiPath,
       JSON.stringify(user),
       {'headers': headers});
+  }
+
+  public updateUserPermissions(user: UserDTO): Observable<void> {
+    const headers = {'content-type': 'application/json'};
+
+    return this.httpclient.patch<void>(`${UsersApiService.baseApiPath}${user.id}/permissions`,
+      JSON.stringify(user.permissions),
+      {'headers': headers}
+    );
   }
 }

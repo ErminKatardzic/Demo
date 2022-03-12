@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PermissionDTO, UserDTO} from "../../../generated/model";
 import {UsersApiService} from "../api-service/users-api.service";
 import {PermissionsApiService} from "../api-service/permissions-api.service";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-edit-permissions',
@@ -15,37 +16,39 @@ export class EditPermissionsComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) user: UserDTO,
               private usersApiService: UsersApiService,
-              private permissionsApiService: PermissionsApiService) {
+              private permissionsApiService: PermissionsApiService,
+              public dialogRef: MatDialogRef<EditPermissionsComponent>) {
     this.user = user;
   }
 
   ngOnInit(): void {
-    console.log(this.user);
     this.permissionsApiService.getPermissions().subscribe(result => {
       this.permissions = result;
     })
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-
-  onSelectAll(items: any) {
-    console.log(items);
-  }
-
-  changeCheckbox(event: any) {
-    console.log(event);
+  changeCheckbox(event: MatCheckboxChange) {
+    if (event.checked) {
+      let permission = this.permissions.find(perm => perm.id.toString() === event.source.id)
+      this.user.permissions.push(permission);
+    } else {
+      this.user.permissions = this.user.permissions.filter((perm, index, array) => {
+          return perm.id.toString() != event.source.id;
+        }
+      )
+    }
   }
 
   isPermissionEnabled(id: Number): boolean {
-    this.user.permissions.forEach(perm => {
-      if (perm.id == id)
-        console.log("it is enabled " + id);
-      return true;
-    })
+    return this.user.permissions.find(perm => perm.id === id) != null;
+  }
 
-    console.log("it isn't enabled " + id);
-    return false;
+  updateUserPermissions() {
+    this.usersApiService.updateUserPermissions(this.user).subscribe(() => {
+        this.dialogRef.close(true)
+      },
+      () =>
+        this.dialogRef.close(false)
+    );
   }
 }

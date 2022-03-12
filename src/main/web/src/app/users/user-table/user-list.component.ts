@@ -12,17 +12,12 @@ import {EditPermissionsComponent} from "../edit-permissions/edit-permissions.com
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent {
   displayedColumns = ['username', 'firstName', 'lastName', 'email', 'status', 'actions']
 
   constructor(public userDataSource: UserTableDataSourceService,
               private dialog: MatDialog
   ) {
-  }
-
-  ngOnInit()
-    :
-    void {
   }
 
   openCreateUserDialog() {
@@ -64,7 +59,6 @@ export class UserListComponent implements OnInit {
   openEditPermissionsDialog(user) {
     this.dialog.open(EditPermissionsComponent, {
       width: '800px',
-      height: '800px',
       data: deepCopy(user)
     }).afterClosed().subscribe(result => {
       if (result) {
