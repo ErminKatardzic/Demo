@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserTableDataSourceService} from "./user-table-data-source.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateUserComponent} from "../create-user/create-user.component";
+import {DeleteUserComponent} from "../delete-user/delete-user.component";
 
 @Component({
   selector: 'app-user-table',
@@ -9,7 +10,7 @@ import {CreateUserComponent} from "../create-user/create-user.component";
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  displayedColumns = ['username', 'firstName', 'lastName', 'email', 'status']
+  displayedColumns = ['username', 'firstName', 'lastName', 'email', 'status', 'actions']
 
   constructor(public userDataSource: UserTableDataSourceService,
               private dialog: MatDialog
@@ -20,15 +21,6 @@ export class UserListComponent implements OnInit {
     :
     void {
   }
-
-//   this.dialog.open(OutboundCallScheduleAddEditComponent, {
-//     width: '600px',
-//     disableClose: true
-//   }).afterClosed().subscribe(result => {
-//   if (result) {
-//     this.dataSource.getAndEmit();
-//   }
-// });
 
   openCreateUserDialog() {
     this.dialog.open(CreateUserComponent, {
@@ -42,5 +34,16 @@ export class UserListComponent implements OnInit {
         }
       }
     );
+  }
+
+  openDeleteUserDialog(user) {
+    this.dialog.open(DeleteUserComponent, {
+      width: '600px',
+      data: user
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.userDataSource.refreshData();
+      }
+    })
   }
 }

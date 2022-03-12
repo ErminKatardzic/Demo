@@ -7,10 +7,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UsersModule} from "./users/users.module";
 import {MatDialogModule} from "@angular/material/dialog";
+import { DeleteUserComponent } from './users/delete-user/delete-user.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     AppComponent,
+    DeleteUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,7 +21,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     HttpClientModule,
     BrowserAnimationsModule,
     UsersModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

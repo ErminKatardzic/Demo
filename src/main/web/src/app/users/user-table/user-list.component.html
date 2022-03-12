@@ -33,6 +33,19 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let user" align="end">
+<!--      <button mat-icon-button color="accent" (click)="editUser(row)" title="Edit User">-->
+<!--        <mat-icon>edit</mat-icon>-->
+<!--      </button>-->
+      <button mat-icon-button color="warn" (click)="openDeleteUserDialog(user)"
+              title="Delete User">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

@@ -24,4 +24,8 @@ export class UsersApiService {
       JSON.stringify(user),
       {'headers': headers});
   }
+
+  public deleteUser(userId: Number): Observable<void>{
+    return this.httpclient.delete<void>(UsersApiService.baseApiPath + userId);
+  }
 }

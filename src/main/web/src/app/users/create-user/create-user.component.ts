@@ -19,7 +19,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser() {
-    console.log(this.request);
     this.apiService.createUser(this.request).subscribe(result => {
         if (result != null) {
           this.dialogRef.close(true);
