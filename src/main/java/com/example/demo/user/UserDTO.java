@@ -12,4 +12,6 @@ public class UserDTO {
     private String username;
     private String email;
     private UserStatusDTO status;
+
+    // suggestion: timestamp when last updated
 }
