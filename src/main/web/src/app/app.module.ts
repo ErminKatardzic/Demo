@@ -7,8 +7,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UsersModule} from "./users/users.module";
 import {MatDialogModule} from "@angular/material/dialog";
-import { DeleteUserComponent } from './users/delete-user/delete-user.component';
+import {DeleteUserComponent} from './users/delete-user/delete-user.component';
 import {MatButtonModule} from "@angular/material/button";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MatButtonModule} from "@angular/material/button";
     BrowserAnimationsModule,
     UsersModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    NgMultiSelectDropDownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

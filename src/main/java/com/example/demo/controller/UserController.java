@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.PermissionDTO;
 import com.example.demo.service.UserService;
-import com.example.demo.user.UserDTO;
+import com.example.demo.model.UserDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,7 +30,7 @@ public class UserController {
 
     @PatchMapping
     public ResponseEntity<UserDTO> updateUser(@Validated @RequestBody UserDTO userDTO) {
-        log.info("Create user request received: {}", userDTO);
+        log.info("Update user request received: {}", userDTO);
 
         UserDTO userDto = userService.updateUser(userDTO);
 
@@ -58,6 +59,17 @@ public class UserController {
         } catch (EmptyResultDataAccessException e) {
             return ResponseEntity.notFound().build();
         }
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping(value = "/{id}/permissions")
+    public ResponseEntity<Void> updatePermissions(@PathVariable Long id,
+                                                  @RequestBody List<PermissionDTO> permissions
+    ) {
+        log.info("Permission update request received: {}", id);
+
+        userService.updatePermissions(id, permissions);
 
         return ResponseEntity.ok().build();
     }

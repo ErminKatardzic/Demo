@@ -1,22 +1,22 @@
 package com.example.demo.service;
 
+import com.example.demo.database.PermissionDocument;
 import com.example.demo.database.UserDocument;
-import com.example.demo.database.UserMapper;
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.database.UserRepository;
-import com.example.demo.user.UserDTO;
+import com.example.demo.model.PermissionDTO;
+import com.example.demo.model.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PermissionService permissionService;
 
     public UserDTO saveUser(UserDTO userDTO) {
         UserDocument userDocument = userMapper.toDocument(userDTO);
@@ -54,5 +54,18 @@ public class UserService {
 
         userRepository.save(userDocument);
         return userMapper.fromDocument(userDocument);
+    }
+
+    public void updatePermissions(Long id, List<PermissionDTO> permissions) {
+        Optional<UserDocument> userDocumentOptional = userRepository.findById(id);
+        if (userDocumentOptional.isEmpty()) {
+            return;
+        }
+
+        UserDocument userDocument = userDocumentOptional.get();
+        Set<PermissionDocument> permissionDocuments = permissionService.searchDocuments(permissions);
+        userDocument.setPermissions(permissionDocuments);
+
+        userRepository.save(userDocument);
     }
 }

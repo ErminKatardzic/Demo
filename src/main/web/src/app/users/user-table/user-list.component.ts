@@ -5,6 +5,7 @@ import {CreateUserComponent} from "../create-user/create-user.component";
 import {DeleteUserComponent} from "../delete-user/delete-user.component";
 import {EditUserComponent} from "../edit-user/edit-user.component";
 import {deepCopy} from "../../util/deep-copy";
+import {EditPermissionsComponent} from "../edit-permissions/edit-permissions.component";
 
 @Component({
   selector: 'app-user-table',
@@ -52,6 +53,18 @@ export class UserListComponent implements OnInit {
   openEditUserDialog(user) {
     this.dialog.open(EditUserComponent, {
       width: '600px',
+      data: deepCopy(user)
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.userDataSource.refreshData();
+      }
+    })
+  }
+
+  openEditPermissionsDialog(user) {
+    this.dialog.open(EditPermissionsComponent, {
+      width: '800px',
+      height: '800px',
       data: deepCopy(user)
     }).afterClosed().subscribe(result => {
       if (result) {

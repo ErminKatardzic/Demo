@@ -1,0 +1,9 @@
+<div *ngIf="permissions != null">
+    <ng-container *ngFor="let permission of permissions">
+      <mat-checkbox [value]="permission.id.toString()"
+             [checked]="isPermissionEnabled(permission.id)"
+             (change)="changeCheckbox($event)">
+        {{ permission.name }}
+      </mat-checkbox>
+    </ng-container>
+</div>

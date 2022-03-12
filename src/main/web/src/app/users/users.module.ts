@@ -11,8 +11,12 @@ import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
-import { EditUserComponent } from './edit-user/edit-user.component';
+import {EditUserComponent} from './edit-user/edit-user.component';
 import {MatSelectModule} from "@angular/material/select";
+import {EditPermissionsComponent} from './edit-permissions/edit-permissions.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 @NgModule({
@@ -20,7 +24,8 @@ import {MatSelectModule} from "@angular/material/select";
     UserListComponent,
     UserMainComponent,
     CreateUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    EditPermissionsComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +37,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    NgMultiSelectDropDownModule,
+    MatCheckboxModule,
+    MatSlideToggleModule
   ]
 })
 export class UsersModule {

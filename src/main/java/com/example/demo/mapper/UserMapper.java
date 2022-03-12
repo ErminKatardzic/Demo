@@ -1,6 +1,7 @@
-package com.example.demo.database;
+package com.example.demo.mapper;
 
-import com.example.demo.user.UserDTO;
+import com.example.demo.database.UserDocument;
+import com.example.demo.model.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -8,6 +9,7 @@ import org.mapstruct.MappingTarget;
 @Mapper
 public interface UserMapper {
     UserDocument toDocument(UserDTO userDTO);
+
     UserDTO fromDocument(UserDocument userDocument);
 
     @Mapping(target = "id", ignore = true)

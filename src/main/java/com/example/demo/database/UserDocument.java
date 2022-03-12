@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -21,4 +22,8 @@ public class UserDocument {
     private String password;
     private String email;
     private UserStatusDocument status;
+
+    // Potential performance hit since it will always fetch permissions from DB
+    @ManyToMany
+    private Set<PermissionDocument> permissions;
 }

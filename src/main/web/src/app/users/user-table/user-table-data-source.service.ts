@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {CollectionViewer, DataSource} from "@angular/cdk/collections";
 import {UserDTO} from "../../../generated/model";
 import {BehaviorSubject, Observable} from "rxjs";
-import {UsersApiService} from "../user-api-service/users-api.service";
+import {UsersApiService} from "../api-service/users-api.service";
 
 @Injectable({
   providedIn: 'root'

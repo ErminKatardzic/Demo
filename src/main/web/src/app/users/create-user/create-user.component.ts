@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UsersApiService} from "../user-api-service/users-api.service";
+import {UsersApiService} from "../api-service/users-api.service";
 import {UserDTO, UserStatusDTO} from "../../../generated/model";
 import {MatDialogRef} from "@angular/material/dialog";
 
@@ -36,7 +36,8 @@ export class CreateUserComponent implements OnInit {
       firstName: null,
       lastName: null,
       username: null,
-      status: UserStatusDTO.INACTIVE
+      status: UserStatusDTO.INACTIVE,
+      permissions: null
     };
   }
 }

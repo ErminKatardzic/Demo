@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.demo.model;
 
 public enum UserStatusDTO {
     ACTIVE,

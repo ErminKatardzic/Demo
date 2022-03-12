@@ -1,10 +1,11 @@
-package com.example.demo.user;
+package com.example.demo.model;
 
 
 import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Data
 public class UserDTO {
@@ -19,6 +20,8 @@ public class UserDTO {
     @Email
     private String email;
     private UserStatusDTO status = UserStatusDTO.INACTIVE;
+
+    private Set<PermissionDTO> permissions;
 
     // suggestion: timestamp when last updated
 }

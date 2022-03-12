@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {UserDTO, UserStatusDTO} from "../../../generated/model";
-import {UsersApiService} from "../user-api-service/users-api.service";
+import {UsersApiService} from "../api-service/users-api.service";
 
 @Component({
   selector: 'app-edit-user',
