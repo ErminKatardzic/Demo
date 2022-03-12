@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.demo.database;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

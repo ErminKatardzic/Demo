@@ -1,5 +1,6 @@
-package com.example.demo.user;
+package com.example.demo.database;
 
+import com.example.demo.user.UserDTO;
 import org.mapstruct.Mapper;
 
 @Mapper
