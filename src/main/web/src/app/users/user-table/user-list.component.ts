@@ -3,6 +3,8 @@ import {UserTableDataSourceService} from "./user-table-data-source.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateUserComponent} from "../create-user/create-user.component";
 import {DeleteUserComponent} from "../delete-user/delete-user.component";
+import {EditUserComponent} from "../edit-user/edit-user.component";
+import {deepCopy} from "../../util/deep-copy";
 
 @Component({
   selector: 'app-user-table',
@@ -40,6 +42,17 @@ export class UserListComponent implements OnInit {
     this.dialog.open(DeleteUserComponent, {
       width: '600px',
       data: user
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.userDataSource.refreshData();
+      }
+    })
+  }
+
+  openEditUserDialog(user) {
+    this.dialog.open(EditUserComponent, {
+      width: '600px',
+      data: deepCopy(user)
     }).afterClosed().subscribe(result => {
       if (result) {
         this.userDataSource.refreshData();

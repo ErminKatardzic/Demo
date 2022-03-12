@@ -28,4 +28,13 @@ export class UsersApiService {
   public deleteUser(userId: Number): Observable<void>{
     return this.httpclient.delete<void>(UsersApiService.baseApiPath + userId);
   }
+
+  public updateUser(user: UserDTO): Observable<UserDTO> {
+    console.log("Sending request" + JSON.stringify(user));
+    const headers = {'content-type': 'application/json'};
+
+    return this.httpclient.patch<UserDTO>(UsersApiService.baseApiPath,
+      JSON.stringify(user),
+      {'headers': headers});
+  }
 }

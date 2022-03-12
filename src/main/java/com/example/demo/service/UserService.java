@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -39,5 +40,19 @@ public class UserService {
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public UserDTO updateUser(UserDTO userDTO) {
+        Optional<UserDocument> userDocumentOptional = userRepository.findById(userDTO.getId());
+
+        if (userDocumentOptional.isEmpty()) {
+            return null;
+        }
+
+        UserDocument userDocument = userDocumentOptional.get();
+        userMapper.updateDocumentFromDTO(userDTO, userDocument);
+
+        userRepository.save(userDocument);
+        return userMapper.fromDocument(userDocument);
     }
 }

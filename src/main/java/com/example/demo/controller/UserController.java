@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +19,23 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody @Validated UserDTO userDTO) {
         log.info("Create user request received: {}", userDTO);
-        // do validate
 
         UserDTO userDto = userService.saveUser(userDTO);
+
+        return ResponseEntity.ok().body(userDto);
+    }
+
+    @PatchMapping
+    public ResponseEntity<UserDTO> updateUser(@Validated @RequestBody UserDTO userDTO) {
+        log.info("Create user request received: {}", userDTO);
+
+        UserDTO userDto = userService.updateUser(userDTO);
+
+        if (userDto == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok().body(userDto);
     }
