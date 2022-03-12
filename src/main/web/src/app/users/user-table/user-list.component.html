@@ -1,6 +1,10 @@
+<mat-toolbar color="accent">
+  <span>Users</span>
+  <span class="fill-space"></span>
+  <button mat-raised-button color="primary" (click)="openCreateUserDialog()">Create User</button>
+</mat-toolbar>
+
 <table mat-table class="full-width-table" aria-label="Elements" [dataSource]="userDataSource">
-  <!-- Voip DC  -->
-  <!--    displayedColumns = ['username', 'firstName', 'lastName', 'email', 'status']-->
   <ng-container matColumnDef="username">
     <th mat-header-cell *matHeaderCellDef>Username</th>
     <td mat-cell *matCellDef="let user">{{user.username}}</td>
@@ -24,9 +28,8 @@
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>Status</th>
     <td mat-cell *matCellDef="let user">
-      {{user.status}}
-      <mat-icon *ngIf="user.status === 'INACTIVE'" title="User Inactive">not_interested</mat-icon>
-      <mat-icon *ngIf="user.status === 'ACTIVE'" title="User Active">done</mat-icon>
+      <mat-icon *ngIf="user.status === 'INACTIVE'" class="user-inactive" title="User Inactive">not_interested</mat-icon>
+      <mat-icon *ngIf="user.status === 'ACTIVE'" class="user-active" title="User Active">done</mat-icon>
     </td>
   </ng-container>
 

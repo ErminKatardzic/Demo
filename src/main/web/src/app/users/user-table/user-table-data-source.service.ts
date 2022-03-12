@@ -14,13 +14,16 @@ export class UserTableDataSourceService implements DataSource<UserDTO> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<UserDTO[] | ReadonlyArray<UserDTO>> {
-    this.apiService.getUsers().subscribe(users =>
-      this.data.next(users)
-    );
-
+    this.refreshData()
     return this.data;
   }
 
   disconnect(collectionViewer: CollectionViewer): void {
+  }
+
+  refreshData() {
+    this.apiService.getUsers().subscribe(users =>
+      this.data.next(users)
+    );
   }
 }

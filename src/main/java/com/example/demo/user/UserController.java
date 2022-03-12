@@ -21,6 +21,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+        log.info("Creating user: {}", userDTO);
         // do validation
         UserDocument userDocument = userMapper.toDocument(userDTO);
 

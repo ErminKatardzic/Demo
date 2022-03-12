@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UsersModule} from "./users/users.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {UsersModule} from "./users/users.module";
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    UsersModule
+    UsersModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
