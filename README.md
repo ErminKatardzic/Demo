@@ -4,7 +4,7 @@ Run `mvn clean install` to build the project. Maven will build both Java and Ang
 
 ## Development
 
-To recreate the database, simply uncomment the line `spring.jpa.hibernate.ddl-auto=create` in `application.properties`.
+To recreate the database, simply uncomment the line `spring.jpa.hibernate.ddl-auto=update` in `application.properties`.
 
 To populate the database, see `sample_data.sql` in the root directory of the project.
 
