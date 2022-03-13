@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.database.PermissionDocument;
-import com.example.demo.database.UserDocument;
+import com.example.demo.entity.PermissionEntity;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.PagedUserList;
 import com.example.demo.filter.UserFilter;
@@ -23,20 +23,20 @@ public class UserService {
     private final PermissionService permissionService;
 
     public UserDTO saveUser(UserDTO userDTO) {
-        UserDocument userDocument = userMapper.toDocument(userDTO);
+        UserEntity userEntity = userMapper.toDocument(userDTO);
 
         // Hash and salt password, maybe make the admin send it?
-        userDocument.setPassword(String.valueOf(UUID.randomUUID()));
+        userEntity.setPassword(String.valueOf(UUID.randomUUID()));
 
-        UserDocument savedUserDocument = userRepository.save(userDocument);
+        UserEntity savedUserEntity = userRepository.save(userEntity);
 
-        return userMapper.fromDocument(savedUserDocument);
+        return userMapper.fromDocument(savedUserEntity);
     }
 
     public List<UserDTO> findAll() {
         ArrayList<UserDTO> users = new ArrayList<>();
 
-        Iterable<UserDocument> userDocuments = userRepository.findAll();
+        Iterable<UserEntity> userDocuments = userRepository.findAll();
         userDocuments.forEach(doc -> users.add(userMapper.fromDocument(doc)));
 
         return users;
@@ -57,9 +57,9 @@ public class UserService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
                 .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
-        Example<UserDocument> userExample = Example.of(userMapper.toDocument(userFilter.getUserFilterCriteria()), exampleMatcher);
+        Example<UserEntity> userExample = Example.of(userMapper.toDocument(userFilter.getUserFilterCriteria()), exampleMatcher);
 
-        Page<UserDocument> userPage = userRepository.findAll(userExample, pageRequest);
+        Page<UserEntity> userPage = userRepository.findAll(userExample, pageRequest);
 
         List<UserDTO> users = userPage.stream()
                 .map(userMapper::fromDocument).toList();
@@ -72,22 +72,22 @@ public class UserService {
     }
 
     public UserDTO updateUser(UserDTO userDTO) {
-        UserDocument userDocument  = userRepository.findById(userDTO.getId())
+        UserEntity userEntity = userRepository.findById(userDTO.getId())
                 .orElseThrow(UserNotFoundException::new);
 
-        userMapper.updateDocumentFromDTO(userDTO, userDocument);
+        userMapper.updateDocumentFromDTO(userDTO, userEntity);
 
-        userRepository.save(userDocument);
-        return userMapper.fromDocument(userDocument);
+        userRepository.save(userEntity);
+        return userMapper.fromDocument(userEntity);
     }
 
     public void updatePermissions(Long id, List<PermissionDTO> permissions) {
-        UserDocument userDocument  = userRepository.findById(id)
+        UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(UserNotFoundException::new);
 
-        Set<PermissionDocument> permissionDocuments = permissionService.searchDocuments(permissions);
-        userDocument.setPermissions(permissionDocuments);
+        Set<PermissionEntity> permissionEntities = permissionService.searchDocuments(permissions);
+        userEntity.setPermissions(permissionEntities);
 
-        userRepository.save(userDocument);
+        userRepository.save(userEntity);
     }
 }

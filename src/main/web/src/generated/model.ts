@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.21.588 on 2022-03-13 17:41:32.
+// Generated using typescript-generator version 2.21.588 on 2022-03-13 18:10:52.
 
 export interface ErrorMessage {
     message: string;

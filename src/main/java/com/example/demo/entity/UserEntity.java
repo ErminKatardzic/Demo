@@ -1,4 +1,4 @@
-package com.example.demo.database;
+package com.example.demo.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class UserDocument {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,9 +21,9 @@ public class UserDocument {
     private String username;
     private String password;
     private String email;
-    private UserStatusDocument status;
+    private UserStatus status;
 
     // Potential performance hit since it will always fetch permissions from DB
     @ManyToMany
-    private Set<PermissionDocument> permissions;
+    private Set<PermissionEntity> permissions;
 }

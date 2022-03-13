@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.database.PermissionRepository;
-import com.example.demo.database.PermissionDocument;
+import com.example.demo.entity.PermissionEntity;
 import com.example.demo.mapper.PermissionMapper;
 import com.example.demo.model.PermissionDTO;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +21,16 @@ public class PermissionService {
     public Set<PermissionDTO> findAll() {
         Set<PermissionDTO> permissions = new HashSet<>();
 
-        Iterable<PermissionDocument> permissionDocuments = permissionRepository.findAll();
+        Iterable<PermissionEntity> permissionDocuments = permissionRepository.findAll();
         permissionDocuments.forEach(doc -> permissions.add(permissionMapper.fromDocument(doc)));
 
         return permissions;
     }
 
-    public Set<PermissionDocument> searchDocuments(List<PermissionDTO> permissionDTOs) {
-        Set<PermissionDocument> permissions = new HashSet<>();
+    public Set<PermissionEntity> searchDocuments(List<PermissionDTO> permissionDTOs) {
+        Set<PermissionEntity> permissions = new HashSet<>();
 
-        Iterable<PermissionDocument> permissionDocuments = permissionRepository.findAllById(permissionDTOs.stream().map(PermissionDTO::getId).collect(Collectors.toList()));
+        Iterable<PermissionEntity> permissionDocuments = permissionRepository.findAllById(permissionDTOs.stream().map(PermissionDTO::getId).collect(Collectors.toList()));
         permissionDocuments.forEach(permissions::add);
 
         return permissions;
