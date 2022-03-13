@@ -1,6 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.21.588 on 2022-03-13 14:54:39.
+// Generated using typescript-generator version 2.21.588 on 2022-03-13 17:11:03.
+
+export interface ErrorMessage {
+    message: string;
+    details: string;
+}
 
 export interface FilterPage {
     page: number;

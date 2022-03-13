@@ -11,6 +11,7 @@ import {UserFilterComponent} from "../user-filter/user-filter.component";
 import {MatSort} from "@angular/material/sort";
 import {MatTable} from "@angular/material/table";
 import {UserDTO} from "../../../generated/model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-user-table',
@@ -26,7 +27,8 @@ export class UserListComponent implements AfterViewInit {
   displayedColumns = ['username', 'firstName', 'lastName', 'email', 'status', 'actions']
 
   constructor(public userDataSource: UserTableDataSourceService,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar
   ) {
   }
 
@@ -42,7 +44,7 @@ export class UserListComponent implements AfterViewInit {
       width: '600px'
     }).afterClosed().subscribe(result => {
         if (result) {
-          this.userDataSource.refreshData();
+          this.refreshDataAndShowPopup();
         }
       }
     );
@@ -54,7 +56,7 @@ export class UserListComponent implements AfterViewInit {
       data: user
     }).afterClosed().subscribe(result => {
       if (result) {
-        this.userDataSource.refreshData();
+        this.refreshDataAndShowPopup();
       }
     })
   }
@@ -65,7 +67,7 @@ export class UserListComponent implements AfterViewInit {
       data: deepCopy(user)
     }).afterClosed().subscribe(result => {
       if (result) {
-        this.userDataSource.refreshData();
+        this.refreshDataAndShowPopup();
       }
     })
   }
@@ -76,8 +78,16 @@ export class UserListComponent implements AfterViewInit {
       data: deepCopy(user)
     }).afterClosed().subscribe(result => {
       if (result) {
-        this.userDataSource.refreshData();
+        this.refreshDataAndShowPopup();
       }
     })
+  }
+
+  private refreshDataAndShowPopup() {
+    this.userDataSource.refreshData();
+    this.snackBar.open("Action Successful!", '', {
+      duration: 3000,
+      panelClass: 'green-snackbar'
+    });
   }
 }

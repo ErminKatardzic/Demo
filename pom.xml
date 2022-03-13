@@ -127,6 +127,7 @@
                     <classPatterns>
                         <classPattern>com.example.demo.**DTO</classPattern>
                         <classPattern>com.example.demo.filter.**</classPattern>
+                        <classPattern>com.example.demo.exception.ErrorMessage</classPattern>
                     </classPatterns>
                     <excludeClassPatterns>
 

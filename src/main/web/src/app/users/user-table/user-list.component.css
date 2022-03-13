@@ -27,3 +27,8 @@
 .fill-space {
   flex: 1 1 auto;
 }
+
+::ng-deep .green-snackbar {
+  background: #6196cc;
+  color: white;
+}

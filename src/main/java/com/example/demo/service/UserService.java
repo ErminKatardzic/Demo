@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.database.PermissionDocument;
 import com.example.demo.database.UserDocument;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.filter.PagedUserList;
 import com.example.demo.filter.UserFilter;
 import com.example.demo.mapper.UserMapper;
@@ -54,7 +55,7 @@ public class UserService {
         if (userFilter.getUserFilterCriteria() == null) {
             userFilter.setUserFilterCriteria(new UserDTO());
         }
-    
+
         ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
                 .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
         Example<UserDocument> userExample = Example.of(userMapper.toDocument(userFilter.getUserFilterCriteria()), exampleMatcher);
@@ -72,13 +73,9 @@ public class UserService {
     }
 
     public UserDTO updateUser(UserDTO userDTO) {
-        Optional<UserDocument> userDocumentOptional = userRepository.findById(userDTO.getId());
+        UserDocument userDocument  = userRepository.findById(userDTO.getId())
+                .orElseThrow(UserNotFoundException::new);
 
-        if (userDocumentOptional.isEmpty()) {
-            return null;
-        }
-
-        UserDocument userDocument = userDocumentOptional.get();
         userMapper.updateDocumentFromDTO(userDTO, userDocument);
 
         userRepository.save(userDocument);
@@ -86,12 +83,9 @@ public class UserService {
     }
 
     public void updatePermissions(Long id, List<PermissionDTO> permissions) {
-        Optional<UserDocument> userDocumentOptional = userRepository.findById(id);
-        if (userDocumentOptional.isEmpty()) {
-            return;
-        }
+        UserDocument userDocument  = userRepository.findById(id)
+                .orElseThrow(UserNotFoundException::new);
 
-        UserDocument userDocument = userDocumentOptional.get();
         Set<PermissionDocument> permissionDocuments = permissionService.searchDocuments(permissions);
         userDocument.setPermissions(permissionDocuments);
 

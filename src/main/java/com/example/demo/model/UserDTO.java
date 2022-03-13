@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Data
@@ -19,7 +20,7 @@ public class UserDTO {
     private String username;
     @Email
     private String email;
-    @NotBlank
+    @NotNull
     private UserStatusDTO status;
 
     private Set<PermissionDTO> permissions;

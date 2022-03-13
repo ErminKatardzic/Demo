@@ -24,8 +24,9 @@ export class DeleteUserComponent implements OnInit {
     this.apiService.deleteUser(this.user.id).subscribe(() => {
         this.dialogRef.close(true)
       },
-      () =>
-        this.dialogRef.close(false)
+      () => {
+        this.dialogRef.close(false);
+      }
     );
   }
 }
