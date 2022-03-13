@@ -22,7 +22,7 @@ public class PermissionService {
         Set<PermissionDTO> permissions = new HashSet<>();
 
         Iterable<PermissionEntity> permissionDocuments = permissionRepository.findAll();
-        permissionDocuments.forEach(doc -> permissions.add(permissionMapper.fromDocument(doc)));
+        permissionDocuments.forEach(doc -> permissions.add(permissionMapper.fromEntity(doc)));
 
         return permissions;
     }

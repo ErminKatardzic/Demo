@@ -6,5 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface PermissionMapper {
-    PermissionDTO fromDocument(PermissionEntity permissionEntity);
+    PermissionDTO fromEntity(PermissionEntity permissionEntity);
 }

@@ -8,11 +8,11 @@ import org.mapstruct.MappingTarget;
 
 @Mapper
 public interface UserMapper {
-    UserEntity toDocument(UserDTO userDTO);
+    UserEntity toEntity(UserDTO userDTO);
 
-    UserDTO fromDocument(UserEntity userEntity);
+    UserDTO fromEntity(UserEntity userEntity);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", ignore = true)
-    void updateDocumentFromDTO(UserDTO userDTO, @MappingTarget UserEntity userEntity);
+    void updateEntityFromDTO(UserDTO userDTO, @MappingTarget UserEntity userEntity);
 }

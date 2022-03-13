@@ -23,21 +23,21 @@ public class UserService {
     private final PermissionService permissionService;
 
     public UserDTO saveUser(UserDTO userDTO) {
-        UserEntity userEntity = userMapper.toDocument(userDTO);
+        UserEntity userEntity = userMapper.toEntity(userDTO);
 
         // Hash and salt password, maybe make the admin send it?
         userEntity.setPassword(String.valueOf(UUID.randomUUID()));
 
         UserEntity savedUserEntity = userRepository.save(userEntity);
 
-        return userMapper.fromDocument(savedUserEntity);
+        return userMapper.fromEntity(savedUserEntity);
     }
 
     public List<UserDTO> findAll() {
         ArrayList<UserDTO> users = new ArrayList<>();
 
         Iterable<UserEntity> userDocuments = userRepository.findAll();
-        userDocuments.forEach(doc -> users.add(userMapper.fromDocument(doc)));
+        userDocuments.forEach(doc -> users.add(userMapper.fromEntity(doc)));
 
         return users;
     }
@@ -57,12 +57,12 @@ public class UserService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
                 .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
-        Example<UserEntity> userExample = Example.of(userMapper.toDocument(userFilter.getUserFilterCriteria()), exampleMatcher);
+        Example<UserEntity> userExample = Example.of(userMapper.toEntity(userFilter.getUserFilterCriteria()), exampleMatcher);
 
         Page<UserEntity> userPage = userRepository.findAll(userExample, pageRequest);
 
         List<UserDTO> users = userPage.stream()
-                .map(userMapper::fromDocument).toList();
+                .map(userMapper::fromEntity).toList();
 
         return new PagedUserList(users, userPage.getTotalElements(), userPage.getTotalPages());
     }
@@ -75,10 +75,10 @@ public class UserService {
         UserEntity userEntity = userRepository.findById(userDTO.getId())
                 .orElseThrow(UserNotFoundException::new);
 
-        userMapper.updateDocumentFromDTO(userDTO, userEntity);
+        userMapper.updateEntityFromDTO(userDTO, userEntity);
 
         userRepository.save(userEntity);
-        return userMapper.fromDocument(userEntity);
+        return userMapper.fromEntity(userEntity);
     }
 
     public void updatePermissions(Long id, List<PermissionDTO> permissions) {
