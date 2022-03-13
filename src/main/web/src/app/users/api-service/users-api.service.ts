@@ -19,7 +19,6 @@ export class UsersApiService {
   }
 
   public createUser(user: UserDTO): Observable<UserDTO> {
-    console.log("Sending request" + JSON.stringify(user));
     const headers = {'content-type': 'application/json'};
 
     return this.httpclient.post<UserDTO>(UsersApiService.baseApiPath,
