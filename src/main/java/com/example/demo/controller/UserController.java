@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.filter.PagedUserList;
+import com.example.demo.model.PagedUserList;
 import com.example.demo.filter.UserFilter;
 import com.example.demo.model.PermissionDTO;
 import com.example.demo.service.UserService;

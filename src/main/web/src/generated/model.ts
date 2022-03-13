@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.21.588 on 2022-03-13 17:11:03.
+// Generated using typescript-generator version 2.21.588 on 2022-03-13 17:29:37.
 
 export interface ErrorMessage {
     message: string;
@@ -15,12 +15,6 @@ export interface FilterPage {
 export interface FilterSort {
     fieldName: string;
     direction: Direction;
-}
-
-export interface PagedUserList {
-    content: UserDTO[];
-    totalElements: number;
-    totalPages: number;
 }
 
 export interface UserFilter {

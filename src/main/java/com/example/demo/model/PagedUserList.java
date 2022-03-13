@@ -1,6 +1,5 @@
-package com.example.demo.filter;
+package com.example.demo.model;
 
-import com.example.demo.model.UserDTO;
 import lombok.Data;
 
 import java.util.List;

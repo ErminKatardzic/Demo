@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.database.PermissionDocument;
 import com.example.demo.database.UserDocument;
 import com.example.demo.exception.UserNotFoundException;
-import com.example.demo.filter.PagedUserList;
+import com.example.demo.model.PagedUserList;
 import com.example.demo.filter.UserFilter;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.database.UserRepository;
@@ -14,7 +14,6 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
