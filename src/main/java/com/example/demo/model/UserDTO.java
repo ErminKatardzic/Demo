@@ -19,7 +19,8 @@ public class UserDTO {
     private String username;
     @Email
     private String email;
-    private UserStatusDTO status = UserStatusDTO.INACTIVE;
+    @NotBlank
+    private UserStatusDTO status;
 
     private Set<PermissionDTO> permissions;
 

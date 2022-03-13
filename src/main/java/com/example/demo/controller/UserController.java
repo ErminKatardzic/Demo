@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.filter.PagedUserList;
+import com.example.demo.filter.UserFilter;
 import com.example.demo.model.PermissionDTO;
 import com.example.demo.service.UserService;
 import com.example.demo.model.UserDTO;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -48,6 +51,15 @@ public class UserController {
         List<UserDTO> users = userService.findAll();
 
         return ResponseEntity.ok().body(users);
+    }
+
+    @GetMapping(value = "test")
+    public ResponseEntity<PagedUserList> searchUsers(UserFilter userFilter) {
+        log.info("Search users request received: {}", userFilter);
+
+        PagedUserList pagedUserList = userService.searchUsers(userFilter);
+
+        return ResponseEntity.ok().body(pagedUserList);
     }
 
     @DeleteMapping(value = "/{id}")

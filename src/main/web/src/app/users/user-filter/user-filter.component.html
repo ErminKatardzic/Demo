@@ -1,0 +1,40 @@
+<div class="filter-container">
+  <form [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)" autocomplete="off">
+
+    <div>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>User Status</mat-label>
+        <mat-select formControlName="status">
+          <ng-container *ngFor="let status of userStates">
+            <mat-option [value]="status">{{status}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="search-button">
+      <button mat-button type="button" (click)="clear()">CLEAR</button>
+      <button mat-raised-button type="submit" color="primary">SEARCH</button>
+    </div>
+  </form>
+</div>

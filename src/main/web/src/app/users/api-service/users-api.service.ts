@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {UserDTO} from "../../../generated/model";
+import {PagedUserList, UserDTO, UserFilter} from "../../../generated/model";
+import {nestedToPrefixedShallow} from "../../util/nested-http-flat";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,12 @@ export class UsersApiService {
 
   public getUsers(): Observable<UserDTO[]> {
     return this.httpclient.get<UserDTO[]>(UsersApiService.baseApiPath);
+  }
+
+  public searchUsers(userFilter: UserFilter): Observable<PagedUserList> {
+    const httpParams = new HttpParams({fromObject: nestedToPrefixedShallow(userFilter)});
+    // return this.httpclient.get<PagedUserList>(UsersApiService.baseApiPath, {params: httpParams});
+    return this.httpclient.get<PagedUserList>(`${UsersApiService.baseApiPath}test`, {params: httpParams});
   }
 
   public createUser(user: UserDTO): Observable<UserDTO> {

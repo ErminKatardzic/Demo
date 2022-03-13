@@ -10,13 +10,12 @@ import {UsersApiService} from "../api-service/users-api.service";
 })
 export class EditUserComponent implements OnInit {
   user: UserDTO;
-  userStates: UserStatusDTO[];
+  userStates: UserStatusDTO[] = Object.values(UserStatusDTO);
 
   constructor(@Inject(MAT_DIALOG_DATA) user: UserDTO,
               private apiService: UsersApiService,
               public dialogRef: MatDialogRef<EditUserComponent>) {
     this.user = user;
-    this.userStates= Object.values(UserStatusDTO);
   }
 
   ngOnInit(): void {

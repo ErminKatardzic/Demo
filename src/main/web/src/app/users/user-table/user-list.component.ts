@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {UserTableDataSourceService} from "./user-table-data-source.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateUserComponent} from "../create-user/create-user.component";
@@ -6,13 +6,23 @@ import {DeleteUserComponent} from "../delete-user/delete-user.component";
 import {EditUserComponent} from "../edit-user/edit-user.component";
 import {deepCopy} from "../../util/deep-copy";
 import {EditPermissionsComponent} from "../edit-permissions/edit-permissions.component";
+import {MatPaginator} from "@angular/material/paginator";
+import {UserFilterComponent} from "../user-filter/user-filter.component";
+import {MatSort} from "@angular/material/sort";
+import {MatTable} from "@angular/material/table";
+import {UserDTO} from "../../../generated/model";
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent {
+export class UserListComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(UserFilterComponent) filter: UserFilterComponent;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<UserDTO>;
+
   displayedColumns = ['username', 'firstName', 'lastName', 'email', 'status', 'actions']
 
   constructor(public userDataSource: UserTableDataSourceService,
@@ -20,15 +30,19 @@ export class UserListComponent {
   ) {
   }
 
+  ngAfterViewInit() {
+    this.userDataSource.setPaginator(this.paginator);
+    this.userDataSource.setFilter(this.filter);
+    this.userDataSource.setSort(this.sort);
+    this.table.dataSource = this.userDataSource;
+  }
+
   openCreateUserDialog() {
     this.dialog.open(CreateUserComponent, {
       width: '600px'
     }).afterClosed().subscribe(result => {
         if (result) {
-          // show success message
           this.userDataSource.refreshData();
-        } else {
-          // show error message
         }
       }
     );

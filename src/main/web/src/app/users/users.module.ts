@@ -7,7 +7,7 @@ import {UserMainComponent} from './user-main/user-main.component';
 import {CreateUserComponent} from './create-user/create-user.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -17,6 +17,9 @@ import {EditPermissionsComponent} from './edit-permissions/edit-permissions.comp
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { UserFilterComponent } from './user-filter/user-filter.component';
+import {MatSortModule} from "@angular/material/sort";
 
 
 @NgModule({
@@ -25,23 +28,27 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     UserMainComponent,
     CreateUserComponent,
     EditUserComponent,
-    EditPermissionsComponent
+    EditPermissionsComponent,
+    UserFilterComponent
   ],
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    MatSelectModule,
-    NgMultiSelectDropDownModule,
-    MatCheckboxModule,
-    MatSlideToggleModule
-  ]
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        NgMultiSelectDropDownModule,
+        MatCheckboxModule,
+        MatSlideToggleModule,
+        MatPaginatorModule,
+        ReactiveFormsModule,
+        MatSortModule
+    ]
 })
 export class UsersModule {
 }

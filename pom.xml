@@ -126,6 +126,7 @@
                     <mapEnum>asEnum</mapEnum>
                     <classPatterns>
                         <classPattern>com.example.demo.**DTO</classPattern>
+                        <classPattern>com.example.demo.filter.**</classPattern>
                     </classPatterns>
                     <excludeClassPatterns>
 

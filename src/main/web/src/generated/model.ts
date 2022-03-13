@@ -1,6 +1,28 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.21.588 on 2022-03-12 19:14:47.
+// Generated using typescript-generator version 2.21.588 on 2022-03-13 14:54:39.
+
+export interface FilterPage {
+    page: number;
+    size: number;
+}
+
+export interface FilterSort {
+    fieldName: string;
+    direction: Direction;
+}
+
+export interface PagedUserList {
+    content: UserDTO[];
+    totalElements: number;
+    totalPages: number;
+}
+
+export interface UserFilter {
+    userFilterCriteria: UserDTO;
+    filterPage: FilterPage;
+    filterSort: FilterSort;
+}
 
 export interface PermissionDTO {
     id: number;
@@ -16,6 +38,11 @@ export interface UserDTO {
     email: string;
     status: UserStatusDTO;
     permissions: PermissionDTO[];
+}
+
+export enum Direction {
+    ASC = "ASC",
+    DESC = "DESC",
 }
 
 export enum UserStatusDTO {
